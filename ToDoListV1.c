@@ -1,5 +1,7 @@
 #include <stdio.h>
 
-int main(){
-    
+int main()
+{
+    printf("Test Code");
+    return 0;
 }
