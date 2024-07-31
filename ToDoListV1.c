@@ -1,7 +1,18 @@
 #include <stdio.h>
 
-int main()
+void login()
 {
-    printf("Test Code");
-    return 0;
+    const int correct_password = 1234;
+    int password;
+    do
+    {
+        printf("Enter password: ");
+        scanf("%d/n", &password);
+    } while (password != correct_password);
+    printf("Login Sucsessful\n");
+}
+
+void main()
+{
+    login();
 }
