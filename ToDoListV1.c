@@ -37,25 +37,25 @@ void login()
 void guide_text1()
 {
     system("cls");
-    printf("\033[31m //////////////// Guide ////////////////\n");
+    printf("\033[34m //////////////// Guide ////////////////\n");
     printf(" -------------------------------------- \n");
     printf(" Command \t| Task \n");
     printf(" -------------------------------------- \n");
-    printf(" add \t\t| Add task to list \n");
-    printf(" remove  \t| Remove task from list \n");
+    printf(" add \t\t- Add task to list \n");
+    printf(" remove  \t- Remove task from list \n");
     printf("\n");
-    printf(" NewList  \t| Create New task list \n");
+    printf(" NewList  \t- Create New task list \n");
     printf("\n");
-    printf(" MC \t\t| mark complete task from list \n");
-    printf(" VC \t\t| View Completed task\n");
+    printf(" MC \t\t- mark complete task from list \n");
+    printf(" VC \t\t- View Completed task\n");
     printf("\n");
-    printf(" Tod \t\t| View task to do today \n");
-    printf(" Tom \t\t| View task to do Tommorow \n");
+    printf(" Tod \t\t- View task to do today \n");
+    printf(" Tom \t\t- View task to do Tommorow \n");
     printf("\n");
-    printf(" logout \t| Logout from task \n");
-    printf(" exit \t\t| Exit from task list \n");
+    printf(" logout \t- Logout from task \n");
+    printf(" exit \t\t- Exit from task list \n");
     printf("\n");
-    printf(" /////////////////////////////////////// \033[0m\n\n");
+    printf(" /////////////////////////////////////// \033[34m\n\n");
 }
 
 /* Function to handle command identification */
