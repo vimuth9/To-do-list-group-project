@@ -1,5 +1,10 @@
 #include <stdio.h>
-/* Function to handle Login */
+#include <string.h>
+#include <conio.h>
+#include <stdlib.h>
+
+void add_task();
+/* Function to handle Login*/
 void login()
 {
     const int correct_password = 1234;
@@ -7,24 +12,56 @@ void login()
     do
     {
         printf("Enter password: ");
-        scanf("%d/n", &password);
+        scanf("%d", &password); // Removed the '/n' in the format specifier
     } while (password != correct_password);
-    printf("Login Sucsessful\n");
+    printf("Login Successful\n");
 }
-/* Function to Print Help text */
+
+/* Function to Print guide text */
 void guide_text()
 {
-    printf("\033[31m //////// Guide TExt  ///////.\033[0m\n");
+    system("cls");
+    printf("\033[31m //////////////// Guide Text Here  ///////.\033[0m\n");
+    printf(" Command \t| Task \n");
+    printf(" ------------------------------- \n");
+    printf(" add \t\t| Add task to list \n");
+    printf(" remove  \t| Remove task from list \n");
+    printf(" MC \t\t| mark complete task from list \n");
+    printf(" Today \t\t| View task to do today \n");
 }
 
-/* Function to handle Login */
+/* Function to handle command identification */
 void command_identifier()
 {
+    char command[20]; // Changed to an array to store command strings
     printf("\033[31m //////// Insert Function  ///////.\033[0m\n");
+    printf("\033[33mInsert Command: \033[0m"); // Changed to yellow text
+    scanf("%s", command);                      // Changed to %s to read a string
+
+    if (strcmp(command, "add") == 0)
+    { // Use strcmp to compare strings
+        printf("Add function initiated\n");
+        add_task();
+    }
+    else
+    {
+        printf("Unknown command\n");
+    }
 }
 
-void main()
+/* Function to add task to the list */
+void add_task()
 {
+    printf("List Number:");
+}
+/* Main Function */
+
+int main()
+{ // Changed void to int
     login();
+    system("cls");
     guide_text();
+    command_identifier(); // Call the command_identifier function
+
+    return 0; // Return an integer value
 }
