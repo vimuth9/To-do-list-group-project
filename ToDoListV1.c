@@ -6,7 +6,7 @@
 /* Functions Include in this project*/
 
 void login();
-void guide_text();
+void guide_text1();
 void command_identifier();
 void add_task();
 void remove_task();
@@ -22,10 +22,14 @@ void login()
         scanf("%d", &password); // Removed the '/n' in the format specifier
     } while (password != correct_password);
     printf("Login Successful\n");
+    sleep(1);
+    system("cls");
+    guide_text1();
+    command_identifier();
 }
 
 /* Function to Print guide text */
-void guide_text()
+void guide_text1()
 {
     system("cls");
     printf("\033[31m //////////////// Guide ////////////////\n");
@@ -86,8 +90,10 @@ void command_identifier()
     }
     else if (strcmp(command, "logout") == 0)
     { // Use strcmp to compare strings
-        printf("exit function initiated\n");
-        add_task();
+        printf("Logging out\n");
+        sleep(1);
+        system("cls");
+        login();
     }
     else if (strcmp(command, "exit") == 0)
     { // Use strcmp to compare strings
@@ -119,9 +125,6 @@ void remove_task()
 int main()
 { // Changed void to int
     login();
-    system("cls");
-    guide_text();
-    command_identifier(); // Call the command_identifier function
 
     return 0; // Return an integer value
 }
