@@ -136,7 +136,7 @@ void remove_task()
 void new_task_list()
 {
     char NewlistName[20];
-    char NewFileName[30];        // Adjust size to accommodate ".txt" and potential path
+    char NewFileName[20];        // Adjust size to accommodate ".txt" and potential path
     char dataPath[] = "./Data/"; // Use a separate variable for the path
 
     printf("Insert name of the new list: ");
