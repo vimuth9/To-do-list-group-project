@@ -2,8 +2,15 @@
 #include <string.h>
 #include <conio.h>
 #include <stdlib.h>
+#include <unistd.h>
+/* Functions Include in this project*/
 
+void login();
+void guide_text();
+void command_identifier();
 void add_task();
+void remove_task();
+
 /* Function to handle Login*/
 void login()
 {
@@ -34,8 +41,8 @@ void guide_text()
     printf(" Tod \t\t| View task to do today \n");
     printf(" Tom \t\t| View task to do Tommorow \n");
 
+    printf(" logout \t\t| Logout from task \n");
     printf(" exit \t\t| Exit from task list \n");
-    printf(" close \t\t| Close Terminal \n");
 
     printf(" /////////////////////////////////////// \033[0m\n\n");
 }
@@ -49,8 +56,46 @@ void command_identifier()
 
     if (strcmp(command, "add") == 0)
     { // Use strcmp to compare strings
-        printf("Add function initiated\n");
+        printf("Add task to list\n");
         add_task();
+    }
+    else if (strcmp(command, "remove") == 0)
+    { // Use strcmp to compare strings
+        printf("Remove task from List\n");
+        add_task();
+    }
+    else if (strcmp(command, "MC") == 0)
+    { // Use strcmp to compare strings
+        printf("Mark Task Completed\n");
+        add_task();
+    }
+    else if (strcmp(command, "VC") == 0)
+    { // Use strcmp to compare strings
+        printf("View Completed task so far\n");
+        add_task();
+    }
+    else if (strcmp(command, "Tod") == 0)
+    { // Use strcmp to compare strings
+        printf("Task to do be done Today\n");
+        add_task();
+    }
+    else if (strcmp(command, "Tom") == 0)
+    { // Use strcmp to compare strings
+        printf("Task to be done Tommorow\n");
+        add_task();
+    }
+    else if (strcmp(command, "logout") == 0)
+    { // Use strcmp to compare strings
+        printf("exit function initiated\n");
+        add_task();
+    }
+    else if (strcmp(command, "exit") == 0)
+    { // Use strcmp to compare strings
+        system("cls");
+        printf("exiting from app\n");
+        sleep(1);
+        system("cls");
+        exit(0);
     }
     else
     {
@@ -60,6 +105,12 @@ void command_identifier()
 
 /* Function to add task to the list */
 void add_task()
+{
+    printf("List Number:");
+}
+
+/* Function to remove task to the list */
+void remove_task()
 {
     printf("List Number:");
 }
