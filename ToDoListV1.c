@@ -3,8 +3,8 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <unistd.h>
-/* Functions Include in this project*/
 
+/*User Defined Functions Included in this project*/
 void login();
 void guide_text1();
 void command_identifier();
@@ -54,9 +54,9 @@ void guide_text1()
 /* Function to handle command identification */
 void command_identifier()
 {
-    char command[20];                          // Changed to an array to store command strings
-    printf("\033[33mInsert Command: \033[0m"); // Changed to yellow text
-    scanf("%s", command);                      // Changed to %s to read a string
+    char command[20];                           // Changed to an array to store command strings
+    printf("\033[33m Insert Command: \033[0m"); // Changed to yellow text
+    scanf("%s", command);                       // Changed to %s to read a string
 
     if (strcmp(command, "add") == 0)
     { // Use strcmp to compare strings
