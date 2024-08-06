@@ -27,8 +27,8 @@ void login()
         scanf("%d", &password); // Removed the '/n' in the format specifier
     } while (password != correct_password);
     printf("Login Successful\n");
-    sleep(1);
-    system("cls");
+    sleep(1);      // Wait 1s
+    system("cls"); // clear terminal
     guide_text1();
     command_identifier();
 }
@@ -136,10 +136,24 @@ void remove_task()
 void new_task_list()
 {
     char NewlistName[20];
+    char NewFileName[30];        // Adjust size to accommodate ".txt" and potential path
+    char dataPath[] = "./Data/"; // Use a separate variable for the path
+
     printf("Insert name of the new list: ");
-    scanf("%c\n", &NewlistName);
-    FILE *fplist;
-    fplist = fopen("List01.txt", "w");
+    scanf("%19s", NewlistName); // Limit input to 19 characters
+
+    // Concatenate filename using strcpy and strcat
+    strcpy(NewFileName, dataPath);
+    strcat(NewFileName, NewlistName);
+    strcat(NewFileName, ".txt");
+
+    FILE *fplist = fopen(NewFileName, "w");
+    if (fplist == NULL)
+    {
+        printf("Error creating file!\n");
+        return;
+    }
+
     fprintf(fplist, "Test text");
     fclose(fplist);
 }
