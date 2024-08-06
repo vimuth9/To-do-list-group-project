@@ -10,6 +10,11 @@ void guide_text1();
 void command_identifier();
 void add_task();
 void remove_task();
+void new_task_list();
+void Mark_Completed();
+void view_completed();
+void view_today();
+void view_tommorow();
 
 /* Function to handle Login*/
 void login()
@@ -38,16 +43,18 @@ void guide_text1()
     printf(" -------------------------------------- \n");
     printf(" add \t\t| Add task to list \n");
     printf(" remove  \t| Remove task from list \n");
-
+    printf("\n");
+    printf(" NewList  \t| Create New task list \n");
+    printf("\n");
     printf(" MC \t\t| mark complete task from list \n");
     printf(" VC \t\t| View Completed task\n");
-
+    printf("\n");
     printf(" Tod \t\t| View task to do today \n");
     printf(" Tom \t\t| View task to do Tommorow \n");
-
-    printf(" logout \t\t| Logout from task \n");
+    printf("\n");
+    printf(" logout \t| Logout from task \n");
     printf(" exit \t\t| Exit from task list \n");
-
+    printf("\n");
     printf(" /////////////////////////////////////// \033[0m\n\n");
 }
 
@@ -66,27 +73,32 @@ void command_identifier()
     else if (strcmp(command, "remove") == 0)
     { // Use strcmp to compare strings
         printf("Remove task from List\n");
-        add_task();
+        remove_task();
+    }
+    else if (strcmp(command, "NewList") == 0)
+    { // Use strcmp to compare strings
+        printf("create new list file\n");
+        new_task_list();
     }
     else if (strcmp(command, "MC") == 0)
     { // Use strcmp to compare strings
         printf("Mark Task Completed\n");
-        add_task();
+        Mark_Completed();
     }
     else if (strcmp(command, "VC") == 0)
     { // Use strcmp to compare strings
         printf("View Completed task so far\n");
-        add_task();
+        view_completed();
     }
     else if (strcmp(command, "Tod") == 0)
     { // Use strcmp to compare strings
         printf("Task to do be done Today\n");
-        add_task();
+        view_today();
     }
     else if (strcmp(command, "Tom") == 0)
     { // Use strcmp to compare strings
         printf("Task to be done Tommorow\n");
-        add_task();
+        view_tommorow();
     }
     else if (strcmp(command, "logout") == 0)
     { // Use strcmp to compare strings
@@ -120,10 +132,38 @@ void remove_task()
 {
     printf("List Number:");
 }
-/* Main Function */
+/* Function to Create a new task list */
+void new_task_list()
+{
+    char NewlistName[20];
+    printf("Insert name of the new list: ");
+    scanf("%c\n", &NewlistName);
+    FILE *fplist;
+    fplist = fopen("List01.txt", "w");
+    fprintf(fplist, "Test text");
+    fclose(fplist);
+}
+
+void Mark_Completed()
+{
+    printf("Functon to mark completed task");
+}
+void view_completed()
+{
+    printf("Function to View completed task");
+}
+void view_today()
+{
+    printf("Function to View task to be done today");
+}
+void view_tommorow()
+{
+    printf("Function to View task to be done tommorow");
+}
+/* Main function Function to Create a new task list */
 
 int main()
-{ // Changed void to int
+{
     login();
 
     return 0; // Return an integer value
