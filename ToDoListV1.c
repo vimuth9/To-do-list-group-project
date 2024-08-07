@@ -12,7 +12,8 @@ void command_identifier01();
 
 void add_task();
 void remove_task();
-void new_task_list();
+
+void new_task_list(); // Finished
 void Mark_Completed();
 void view_completed();
 void view_today();
@@ -31,6 +32,7 @@ void login()
     printf("Login Successful\n");
     sleep(1);      // Wait 1s
     system("cls"); // clear terminal
+    guide_text01();
     command_identifier01();
 }
 
@@ -56,17 +58,16 @@ void guide_text01()
     printf(" logout \t- Logout from task \n");
     printf(" exit \t\t- Exit from task list \n");
     printf("\n");
-    printf(" /////////////////////////////////////// \033[34m\n\n");
+    printf(" /////////////////////////////////////// \033[0m\n\n");
+    command_identifier01();
 }
 
 /* Function to handle command identification */
 void command_identifier01()
 {
-    guide_text01();
     char command[20];                           // Changed to an array to store command strings
     printf("\033[33m Insert Command: \033[0m"); // Changed to yellow text
     scanf("%s", command);                       // Changed to %s to read a string
-
     if (strcmp(command, "add") == 0)
     { // Use strcmp to compare strings
         printf("Add task to list\n");
@@ -120,6 +121,7 @@ void command_identifier01()
     else
     {
         printf("Unknown command\n");
+        command_identifier01();
     }
 }
 
@@ -134,54 +136,71 @@ void remove_task()
 {
     printf("List Number:");
 }
-/* Function to Create a new task list */
+/* Function to Create a new task list - Finished */
 void new_task_list()
 {
     system("cls");
     char ListDetails[100];
     char NewlistName[20];
-    char NewFileName[20];
-    char NewlistCatagorie[25];
-    char dataPath[] = "./Data/"; // File path to the task lists and ther information
+    char NewFileName[50];
+    char NewlistCategory[30];
+    char dataPath[] = "./Data/"; // File path to the task lists and their information
 
-    FILE *fpalist = fopen("./Data/TaskLists.txt", "r+"); // Available Task Lists informations
+    FILE *fpalist = fopen("./Data/TaskLists.txt", "r+");
     if (fpalist == NULL)
     {
-        printf("Data file Missing!\n");
-        printf("New Data file is created");
-        FILE *fpalist = fopen("./Data/TaskLists.txt", "w");
-        sleep(1);
+        printf("Data file missing!\n");
+        printf("New data file is being created...\n");
+        fpalist = fopen("./Data/TaskLists.txt", "w+");
+        if (fpalist == NULL)
+        {
+            perror("Failed to create TaskLists.txt");
+            return;
+        }
+        sleep(1); // Use Sleep() on Windows
         system("cls");
     }
 
     printf("-------------------------------------------------\n");
-    printf("%s\n", fpalist);
-    printf("-------------------------------------------------\n");
+    printf("File opened successfully.\n\n\033[41m Do not create a new list with the names below \033[0m\n");
 
+    // Print content inside the text file
+    fseek(fpalist, 0, SEEK_SET); // Move the file pointer to the beginning of the file
+    char ch;
+    while ((ch = fgetc(fpalist)) != EOF)
+    {
+        putchar(ch);
+    }
+
+    printf("-------------------------------------------------\n");
+    printf("\033[43m\033[30m Do not include spaces bettween words \033[0m\n");
     printf("Insert name of the new list: ");
-    scanf("%20s", &NewlistName); // Limit input to 19 characters
-    printf("Task Catagorie: ");
-    scanf("%20s", &NewlistCatagorie);
+    scanf("%19s", NewlistName); // Limit input to 19 characters
+    printf("Task Category: ");
+    scanf("%29s", NewlistCategory);
 
     // Concatenate filename using strcpy and strcat
     strcpy(NewFileName, dataPath);
     strcat(NewFileName, NewlistName);
     strcat(NewFileName, ".txt");
     FILE *fpnlist = fopen(NewFileName, "w");
-
-    if (fpnlist == NULL) // If a error occured when creating a file
+    if (fpnlist == NULL)
     {
-        printf("Error when creating creating file!\n");
+        perror("Failed to create new list file");
+        fclose(fpalist);
         return;
     }
 
-    fprintf(fpnlist, "///////////////// %s - %s /////////////////\n", NewlistName, NewlistCatagorie); // comment this line if unwanted
+    // Write to the files
+    fprintf(fpalist, "%s - %s\n", NewlistName, NewlistCategory);
+    fprintf(fpnlist, "///////////////// %s - %s /////////////////\n", NewlistName, NewlistCategory);
 
-    fprintf(fpalist, "%s - %s \n", NewlistName, NewlistCatagorie);
-
+    // Close the files
     fclose(fpnlist);
     fclose(fpalist);
-    command_identifier01();
+
+    // Call the guide text function
+    guide_text01();
 }
 //--------------------------------------------------------------------------------------------------------------------------------
 void Mark_Completed()
@@ -206,5 +225,5 @@ void view_tommorow()
 void main()
 {
     // login();  // uncomment this
-    command_identifier01();
+    guide_text01();
 }
