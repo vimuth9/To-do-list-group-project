@@ -196,14 +196,38 @@ void new_task_list()
 
 //---------------------------------------------------Hashan-----------------------------------------------------------------------------
 
+
+/*
+------------Please Read this before Starting------------
+Use a array system to store task under List01
+Store all files under this path  "./Data/yourFileNameHere.txt"
+
+The order of data should be
+(Task,Subject,Due_date,Status)
+
+Data types are as follow
+- Task - Strings
+- Subject - Interger []
+- Due_date - [Note: discuss with Rivindu]
+- Status - interger [ Note: Not_Completed(defult) = 0 , Completed = 1 ]
+
+Additional information
+- frequently compile and test the program, commit only if the compiled exe file is running without any errors.
+- Make sure to add text to help the user
+- Feel free to use ANSI color codeing if needed to make the user interface colorfull and informative
+
+*/
+
 /* Function to add task to the list */
 void add_task()
 {
+    printf("Functon to add new task to the list");
 }
 
 /* Function to remove task to the list */
 void remove_task()
 {
+    printf("Functon to remove task from a list");
 }
 
 //----------------------------------------------------Nisindu----------------------------------------------------------------------------
