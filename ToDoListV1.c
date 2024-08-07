@@ -7,17 +7,19 @@
 /*User Defined Functions Included in this project*/
 void login();
 
-void guide_text01();
-void command_identifier01();
+void guide_text01();         // Vimuth - Finished
+void command_identifier01(); // Vimuth - Finished
+void new_task_list();        // Vimuth - Finished
 
-void add_task();
-void remove_task();
+void add_task();    // Hashan
+void remove_task(); // Hashan
 
-void new_task_list(); // Finished
-void Mark_Completed();
-void view_completed();
-void view_today();
-void view_tommorow();
+void Mark_Completed();   // Nisindu
+void view_completed();   // Nisindu
+void Delete_Completed(); // Nisindu
+
+void view_today();    // Rivindu
+void view_tommorow(); // Rivindu
 
 /* Function to handle Login*/
 void login()
@@ -35,7 +37,7 @@ void login()
     guide_text01();
     command_identifier01();
 }
-
+//---------------------------------------------------Vimuth-----------------------------------------------------------------------------
 /* Function to Print guide text */
 void guide_text01()
 {
@@ -62,56 +64,56 @@ void guide_text01()
     command_identifier01();
 }
 
-/* Function to handle command identification */
+/* Function to handle command identification 01*/
 void command_identifier01()
 {
-    char command[20];                           // Changed to an array to store command strings
-    printf("\033[33m Insert Command: \033[0m"); // Changed to yellow text
-    scanf("%s", command);                       // Changed to %s to read a string
+    char command[20]; // To store command string
+    printf("\033[33m Insert Command: \033[0m");
+    scanf("%s", command); // Store command string
     if (strcmp(command, "add") == 0)
-    { // Use strcmp to compare strings
+    {
         printf("Add task to list\n");
         add_task();
     }
     else if (strcmp(command, "remove") == 0)
-    { // Use strcmp to compare strings
+    {
         printf("Remove task from List\n");
         remove_task();
     }
     else if (strcmp(command, "NewList") == 0)
-    { // Use strcmp to compare strings
+    {
         printf("create new list file\n");
         new_task_list();
     }
     else if (strcmp(command, "MC") == 0)
-    { // Use strcmp to compare strings
+    {
         printf("Mark Task Completed\n");
         Mark_Completed();
     }
     else if (strcmp(command, "VC") == 0)
-    { // Use strcmp to compare strings
+    {
         printf("View Completed task so far\n");
         view_completed();
     }
     else if (strcmp(command, "Tod") == 0)
-    { // Use strcmp to compare strings
+    {
         printf("Task to do be done Today\n");
         view_today();
     }
     else if (strcmp(command, "Tom") == 0)
-    { // Use strcmp to compare strings
+    {
         printf("Task to be done Tommorow\n");
         view_tommorow();
     }
     else if (strcmp(command, "logout") == 0)
-    { // Use strcmp to compare strings
+    {
         printf("Logging out\n");
         sleep(1);
         system("cls");
         login();
     }
     else if (strcmp(command, "exit") == 0)
-    { // Use strcmp to compare strings
+    {
         system("cls");
         printf("exiting from app\n");
         sleep(1);
@@ -125,18 +127,7 @@ void command_identifier01()
     }
 }
 
-/* Function to add task to the list */
-void add_task()
-{
-    printf("List Number:");
-}
-
-/* Function to remove task to the list */
-void remove_task()
-{
-    printf("List Number:");
-}
-/* Function to Create a new task list - Finished */
+/* Function to Create a new task list */
 void new_task_list()
 {
     system("cls");
@@ -202,7 +193,22 @@ void new_task_list()
     // Call the guide text function
     guide_text01();
 }
-//--------------------------------------------------------------------------------------------------------------------------------
+
+//---------------------------------------------------Hashan-----------------------------------------------------------------------------
+
+/* Function to add task to the list */
+void add_task()
+{
+    printf("List Number:");
+}
+
+/* Function to remove task to the list */
+void remove_task()
+{
+    printf("List Number:");
+}
+
+//----------------------------------------------------------Nisindu----------------------------------------------------------------------
 void Mark_Completed()
 {
     printf("Functon to mark completed task");
@@ -211,6 +217,10 @@ void view_completed()
 {
     printf("Function to View completed task");
 }
+void Delete_Completed()
+{
+}
+//----------------------------------------------------------Rivindu----------------------------------------------------------------------
 void view_today()
 {
     printf("Function to View task to be done today");
