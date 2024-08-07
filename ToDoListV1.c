@@ -199,16 +199,14 @@ void new_task_list()
 /* Function to add task to the list */
 void add_task()
 {
-    printf("List Number:");
 }
 
 /* Function to remove task to the list */
 void remove_task()
 {
-    printf("List Number:");
 }
 
-//----------------------------------------------------------Nisindu----------------------------------------------------------------------
+//----------------------------------------------------Nisindu----------------------------------------------------------------------------
 void Mark_Completed()
 {
     printf("Functon to mark completed task");
@@ -219,8 +217,9 @@ void view_completed()
 }
 void Delete_Completed()
 {
+    printf("Function to Delete completed task");
 }
-//----------------------------------------------------------Rivindu----------------------------------------------------------------------
+//----------------------------------------------------Rivindu----------------------------------------------------------------------------
 void view_today()
 {
     printf("Function to View task to be done today");
@@ -229,8 +228,8 @@ void view_tommorow()
 {
     printf("Function to View task to be done tommorow");
 }
-//--------------------------------------------------------------------------------------------------------------------------------
 
+//--------------------------------------------------------------------------------------------------------------------------------
 // Main function
 void main()
 {
