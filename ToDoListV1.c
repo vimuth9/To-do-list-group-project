@@ -6,8 +6,10 @@
 
 /*User Defined Functions Included in this project*/
 void login();
-void guide_text1();
-void command_identifier();
+
+void guide_text01();
+void command_identifier01();
+
 void add_task();
 void remove_task();
 void new_task_list();
@@ -29,12 +31,11 @@ void login()
     printf("Login Successful\n");
     sleep(1);      // Wait 1s
     system("cls"); // clear terminal
-    guide_text1();
-    command_identifier();
+    command_identifier01();
 }
 
 /* Function to Print guide text */
-void guide_text1()
+void guide_text01()
 {
     system("cls");
     printf("\033[34m //////////////// Guide ////////////////\n");
@@ -59,8 +60,9 @@ void guide_text1()
 }
 
 /* Function to handle command identification */
-void command_identifier()
+void command_identifier01()
 {
+    guide_text01();
     char command[20];                           // Changed to an array to store command strings
     printf("\033[33m Insert Command: \033[0m"); // Changed to yellow text
     scanf("%s", command);                       // Changed to %s to read a string
@@ -135,29 +137,53 @@ void remove_task()
 /* Function to Create a new task list */
 void new_task_list()
 {
+    system("cls");
+    char ListDetails[100];
     char NewlistName[20];
-    char NewFileName[20];        // Adjust size to accommodate ".txt" and potential path
-    char dataPath[] = "./Data/"; // Use a separate variable for the path
+    char NewFileName[20];
+    char NewlistCatagorie[25];
+    char dataPath[] = "./Data/"; // File path to the task lists and ther information
+
+    FILE *fpalist = fopen("./Data/TaskLists.txt", "r+"); // Available Task Lists informations
+    if (fpalist == NULL)
+    {
+        printf("Data file Missing!\n");
+        printf("New Data file is created");
+        FILE *fpalist = fopen("./Data/TaskLists.txt", "w");
+        sleep(1);
+        system("cls");
+    }
+
+    printf("-------------------------------------------------\n");
+    printf("%s\n", fpalist);
+    printf("-------------------------------------------------\n");
 
     printf("Insert name of the new list: ");
-    scanf("%19s", NewlistName); // Limit input to 19 characters
+    scanf("%20s", &NewlistName); // Limit input to 19 characters
+    printf("Task Catagorie: ");
+    scanf("%20s", &NewlistCatagorie);
 
     // Concatenate filename using strcpy and strcat
     strcpy(NewFileName, dataPath);
     strcat(NewFileName, NewlistName);
     strcat(NewFileName, ".txt");
+    FILE *fpnlist = fopen(NewFileName, "w");
 
-    FILE *fplist = fopen(NewFileName, "w");
-    if (fplist == NULL)
+    if (fpnlist == NULL) // If a error occured when creating a file
     {
-        printf("Error creating file!\n");
+        printf("Error when creating creating file!\n");
         return;
     }
 
-    fprintf(fplist, "Test text");
-    fclose(fplist);
-}
+    fprintf(fpnlist, "///////////////// %s - %s /////////////////\n", NewlistName, NewlistCatagorie); // comment this line if unwanted
 
+    fprintf(fpalist, "%s - %s \n", NewlistName, NewlistCatagorie);
+
+    fclose(fpnlist);
+    fclose(fpalist);
+    command_identifier01();
+}
+//--------------------------------------------------------------------------------------------------------------------------------
 void Mark_Completed()
 {
     printf("Functon to mark completed task");
@@ -174,11 +200,11 @@ void view_tommorow()
 {
     printf("Function to View task to be done tommorow");
 }
-/* Main function Function to Create a new task list */
+//--------------------------------------------------------------------------------------------------------------------------------
 
-int main()
+// Main function
+void main()
 {
-    login();
-
-    return 0; // Return an integer value
+    // login();  // uncomment this
+    command_identifier01();
 }
