@@ -33,7 +33,7 @@ void login()
     } while (password != correct_password);
     printf("Login Successful\n");
     sleep(1);      // Wait 1s
-    system("cls"); // clear terminal
+    system("cls"); // clear terminal <stdlib.h>
     guide_text01();
     command_identifier01();
 }
