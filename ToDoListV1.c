@@ -22,8 +22,7 @@ void view_today();    // Rivindu
 void view_tommorow(); // Rivindu
 
 /* Function to handle Login*/
-void login()
-{
+void login(){
     const int correct_password = 1234;
     int password;
     do
