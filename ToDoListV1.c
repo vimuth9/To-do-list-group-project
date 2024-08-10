@@ -232,7 +232,8 @@ void remove_task()
 //----------------------------------------------------Nisindu----------------------------------------------------------------------------
 /*
 ------------Please Read this before Starting------------
-Use a array system to store task under List01
+the project uses 2 dimentinal array system to store task under 
+test code with List03
 files are stored under this path  "./Data/yourFileNameHere.txt"
 
 Data types are as follow
@@ -267,7 +268,8 @@ void Delete_Completed()
 //----------------------------------------------------Rivindu----------------------------------------------------------------------------
 /*
 ------------Please Read this before Starting------------
-Use a array system to store task under List01
+A 2 dimentinal array system is used to store  task under files  
+test code with List02
 files are stored under this path  "./Data/yourFileNameHere.txt"
 
 The order of data are
@@ -296,6 +298,29 @@ void view_tommorow()
     printf("Function to View task to be done tommorow");
 }
 //----------------------------------------------------Dulaj----------------------------------------------------------------------------
+/*
+------------Please Read this before Starting------------
+A 2 dimentinal array system is used to store  task under files 
+test code with List04
+files are stored under this path  "./Data/yourFileNameHere.txt"
+
+The order of data are
+(Task,Subject,Due_date,Status)
+
+Data types are as follow
+- Task - Strings
+- Subject - Interger []
+- Due_date - [Note: discuss with Rivindu]
+- Status - interger [ Note: Not_Completed(defult) = 0 , Completed = 1 ]
+
+therfore you need to acces the array and print it according
+
+Additional information
+- frequently compile and test the program, commit only if the compiled exe file is running without any errors.
+- Make sure to add/print text to help the user
+- Feel free to use ANSI color codeing if needed to make the user interface colorfull and informative
+
+*/
 void print_selected_list()
 {
     printf("");
