@@ -4,6 +4,14 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+struct Task
+{
+    char task[20 ];
+    int Due_date; // due date 
+    int Subjects; // subject is added through numbers
+    int Status;  // 1 means completed 0 means not completed
+};
+
 /*User Defined Functions Included in this project*/
 void login();
 
@@ -193,12 +201,11 @@ void new_task_list()
     // Call the guide text function
     guide_text01();
 }
-
 //---------------------------------------------------Hashan-----------------------------------------------------------------------------
 
 /*
 ------------Please Read this before Starting------------
-Use a array system to store task under List01
+Use a struct system to store task under List01
 Store all files under this path  "./Data/yourFileNameHere.txt"
 
 The order of data should be
@@ -221,6 +228,14 @@ Additional information
 void add_task()
 {
     printf("Functon to add new task to the list");
+    printf("///////////guide 02///////////////");
+    printf("Press")
+    printf("1-/t List01 - ");
+    printf("2-/t List02 - ");
+    printf("3-/t List03 - ");
+    printf("4-/t List04");
+
+
 }
 
 /* Function to remove task to the list */
@@ -232,7 +247,7 @@ void remove_task()
 //----------------------------------------------------Nisindu----------------------------------------------------------------------------
 /*
 ------------Please Read this before Starting------------
-the project uses 2 dimentinal array system to store task under 
+the project uses struct system to store task under 
 test code with List03
 files are stored under this path  "./Data/yourFileNameHere.txt"
 
@@ -268,7 +283,7 @@ void Delete_Completed()
 //----------------------------------------------------Rivindu----------------------------------------------------------------------------
 /*
 ------------Please Read this before Starting------------
-A 2 dimentinal array system is used to store  task under files  
+the project uses struct system to store task under 
 test code with List02
 files are stored under this path  "./Data/yourFileNameHere.txt"
 
@@ -300,7 +315,7 @@ void view_tommorow()
 //----------------------------------------------------Dulaj----------------------------------------------------------------------------
 /*
 ------------Please Read this before Starting------------
-A 2 dimentinal array system is used to store  task under files 
+the project uses struct system to store task under 
 test code with List04
 files are stored under this path  "./Data/yourFileNameHere.txt"
 
