@@ -229,7 +229,7 @@ void add_task()
 {
     printf("Functon to add new task to the list");
     printf("///////////guide 02///////////////");
-    printf("Press")
+    printf("Press");
     printf("1-/t List01 - ");
     printf("2-/t List02 - ");
     printf("3-/t List03 - ");
