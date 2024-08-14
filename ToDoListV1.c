@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <time.h>
 
 struct Task
 {
@@ -307,11 +308,241 @@ Additional information
 void view_today()
 {
     printf("Function to View task to be done today");
+
+    //today
+    FILE *fptr;
+    char line[100];        // Buffer for reading lines from the file
+    char arr[100][100];    // Array to store each line
+    char arr2[100][100][100]; 
+    int i = 0;
+    char *token;
+    int done_j;
+
+    fptr = fopen("list.txt", "r");
+
+    if (fptr == NULL) {
+        printf("ERROR: Unable to open file\n");
+        return 1;
+    }
+
+    // Skip the first line (header)
+    if (fgets(line, sizeof(line), fptr) == NULL) {
+        printf("ERROR: Unable to read the first line\n");
+        fclose(fptr);
+        return 1;
+    }
+
+    // Read the remaining lines and store them in the array
+    while (fgets(line, sizeof(line), fptr) != NULL) {
+        strcpy(arr[i], line);
+        done_j=0;
+        for(int j=1;j<4; j++)
+        {   
+            if(done_j==0)
+            {
+                token=strtok(arr[i],",");
+                strcpy(arr2[i][0], token);
+                //printf("%s",token);
+                //printf("arr2[%d][0]=%s\n",i,arr2[i][0]);
+                done_j=1;
+            }
+            token=strtok(NULL,",");
+            strcpy(arr2[i][j], token);
+            //printf("%s",token);
+            //printf("arr2[%d][%d]=%s\n",i,j,arr2[i][j]);
+
+
+        }
+        i++;
+        
+    }
+    //printf("%d",sizeof(line));
+    fclose(fptr);
+
+    //today find//////////////////////////////////////////////////////////////
+    time_t t;
+    struct tm *tm_info;
+    char date[11]; // To store the date in "YYYY.MM.DD" format
+
+    // Get the current time
+    time(&t);
+
+    // Convert it to local time representation
+    tm_info = localtime(&t);
+
+    // Format the date as "YYYY.MM.DD" and store it in the 'date' variable
+    strftime(date, 11, "%Y.%m.%d", tm_info);
+
+
+    // Example: Assign today's date to a string variable
+    char today[11];
+    snprintf(today, sizeof(today), "%s", date);
+
+    // Print the 'today' variable to verify
+    //printf("Today's date assigned to 'today' variable: %s\n", today);
+    /////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////
+    
+    //tommorow find////////////////////////////////////////////////////////
+    char tommorow[15];
+
+    // Get today's date
+    strftime(today, sizeof(today), "%Y.%m.%d", localtime(&t));
+
+    // Calculate tomorrow's date by adding 1 day (24 hours * 60 minutes * 60 seconds)
+    char tomorrow[11];
+    t += 24 * 60 * 60;
+    strftime(tomorrow, sizeof(tomorrow), "%Y.%m.%d", localtime(&t));
+
+    printf("Today: %s\n", today);
+
+    
+    //////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+        //today tasks
+    
+    for(i=0; i<=sizeof(line);i++)
+    {
+        //printf("arr2[%d][2] is:%s   today is:%s\n"  ,i,arr2[i][2],today);
+        
+
+        if(strcmp(arr2[i][2],today)==0 && strcmp(arr2[i][3],"yes}")==0 )
+        {
+            printf("%s  %s  %s  %s\n",arr2[i][0],arr2[i][1],arr2[i][2],arr2[i][3]);
+        }
+       
+       
+       
+    }
+
+        
+        
+       
 }
+    
+
+    
+    
+
+
+
 void view_tommorow()
 {
     printf("Function to View task to be done tommorow");
+
+
+    //tommorow
+    FILE *fptr;
+    char line[100];        // Buffer for reading lines from the file
+    char arr[100][100];    // Array to store each line
+    char arr2[100][100][100]; 
+    int i = 0;
+    char *token;
+    int done_j;
+
+    fptr = fopen("list.txt", "r");
+
+    if (fptr == NULL) {
+        printf("ERROR: Unable to open file\n");
+        return 1;
+    }
+
+    // Skip the first line (header)
+    if (fgets(line, sizeof(line), fptr) == NULL) {
+        printf("ERROR: Unable to read the first line\n");
+        fclose(fptr);
+        return 1;
+    }
+
+    // Read the remaining lines and store them in the array
+    while (fgets(line, sizeof(line), fptr) != NULL) {
+        strcpy(arr[i], line);
+        done_j=0;
+        for(int j=1;j<4; j++)
+        {   
+            if(done_j==0)
+            {
+                token=strtok(arr[i],",");
+                strcpy(arr2[i][0], token);
+                //printf("%s",token);
+                //printf("arr2[%d][0]=%s\n",i,arr2[i][0]);
+                done_j=1;
+            }
+            token=strtok(NULL,",");
+            strcpy(arr2[i][j], token);
+            //printf("%s",token);
+            //printf("arr2[%d][%d]=%s\n",i,j,arr2[i][j]);
+
+
+        }
+        i++;
+        
+    }
+    //printf("%d",sizeof(line));
+    fclose(fptr);
+
+    //today find//////////////////////////////////////////////////////////////
+    time_t t;
+    struct tm *tm_info;
+    char date[11]; // To store the date in "YYYY.MM.DD" format
+
+    // Get the current time
+    time(&t);
+
+    // Convert it to local time representation
+    tm_info = localtime(&t);
+
+    // Format the date as "YYYY.MM.DD" and store it in the 'date' variable
+    strftime(date, 11, "%Y.%m.%d", tm_info);
+
+
+    // Example: Assign today's date to a string variable
+    char today[11];
+
+    
+    //tommorow find////////////////////////////////////////////////////////
+    char tommorow[15];
+
+    // Get today's date
+    strftime(today, sizeof(today), "%Y.%m.%d", localtime(&t));
+
+    // Calculate tomorrow's date by adding 1 day (24 hours * 60 minutes * 60 seconds)
+    char tomorrow[11];
+    t += 24 * 60 * 60;
+    strftime(tomorrow, sizeof(tomorrow), "%Y.%m.%d", localtime(&t));
+
+    printf("Today: %s\n", today);
+    printf("Tomorrow: %s\n", tomorrow);
+    
+    //////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////
+
+
+
+        //tomorrow tasks
+    
+    for(i=0; i<=sizeof(line);i++)
+    {
+        //printf("arr2[%d][2] is:%s   tommorow is:%s\n"  ,i,arr2[i][2],tomorrow);
+        
+
+        if(strcmp(arr2[i][2],tomorrow)==0 && strcmp(arr2[i][3],"yes}")==0 )
+        {
+            printf("%s  %s  %s  %s\n",arr2[i][0],arr2[i][1],arr2[i][2],arr2[i][3]);
+        }
+        
+        
+       
+    }
+    
+//&& strcmp(arr2[i][3],"yes}")==0
+    
+    
+    return 0;
+
 }
+
 //----------------------------------------------------Dulaj----------------------------------------------------------------------------
 /*
 ------------Please Read this before Starting------------
