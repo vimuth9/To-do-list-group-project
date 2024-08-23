@@ -4,21 +4,30 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
-
+/*The application has to remember
+- lists and there use
+- tasks under each list
+*/
 struct Task
 {
-    char task[20 ];
-    int Due_date; // due date 
+    char task[20];
+    int Due_date; // due date
     int Subjects; // subject is added through numbers
-    int Status;  // 1 means completed 0 means not completed
+    int Status;   // 1 means completed 0 means not completed
 };
-
+struct Lists
+{
+    int List_No;             // List ID
+    char list_name[20];      // List Name the file is saved accordding this
+    char list_categorie[20]; // Categorie of the task in the list
+};
 /*User Defined Functions Included in this project*/
 void login();
 
 void guide_text01();         // Vimuth - Finished
 void command_identifier01(); // Vimuth - Finished
 void new_task_list();        // Vimuth - Finished
+void delete_task_list();
 
 void add_task();    // Hashan
 void remove_task(); // Hashan
@@ -59,6 +68,7 @@ void guide_text01()
     printf(" remove  \t- Remove task from list \n");
     printf("\n");
     printf(" NewList  \t- Create New task list \n");
+    printf(" DeletList  \t- Create New task list \n");
     printf("\n");
     printf(" MC \t\t- mark complete task from list \n");
     printf(" VC \t\t- View Completed task\n");
@@ -78,8 +88,8 @@ void command_identifier01()
 {
     char command[20]; // To store command string
     printf("\033[33m Insert Command: \033[0m");
-    scanf("%s", command); // Store command string
-    if (strcmp(command, "add") == 0)
+    scanf("%s", command);            // Store command string
+    if (strcmp(command, "add") == 0) // compareing the string enterd
     {
         printf("Add task to list\n");
         add_task();
@@ -93,6 +103,11 @@ void command_identifier01()
     {
         printf("create new list file\n");
         new_task_list();
+    }
+    else if (strcmp(command, "DeletList") == 0)
+    {
+        printf("create new list file\n");
+        delete_task_list();
     }
     else if (strcmp(command, "MC") == 0)
     {
@@ -179,7 +194,7 @@ void new_task_list()
     printf("Task Category: ");
     scanf("%29s", NewlistCategory);
 
-    // Concatenate filename using strcpy and strcat
+    // Copying and  Concatenate filename using strcpy and strcat
     strcpy(NewFileName, dataPath);
     strcat(NewFileName, NewlistName);
     strcat(NewFileName, ".txt");
@@ -202,6 +217,16 @@ void new_task_list()
     // Call the guide text function
     guide_text01();
 }
+
+void delete_task_list(){
+    system("cls");
+    char ListDetails[100];
+    char NewlistName[20];
+    char NewFileName[50];
+    char NewlistCategory[30];
+    char dataPath[] = "./Data/";
+}
+
 //---------------------------------------------------Hashan-----------------------------------------------------------------------------
 
 /*
@@ -228,15 +253,17 @@ Additional information
 /* Function to add task to the list */
 void add_task()
 {
-    printf("Functon to add new task to the list");
-    printf("///////////guide 02///////////////");
-    printf("Press");
-    printf("1-/t List01 - ");
-    printf("2-/t List02 - ");
-    printf("3-/t List03 - ");
-    printf("4-/t List04");
+    printf("Functon to add new task to the list\n");
+    /*  select to which list it shold be addded
+        printf("///////////guide 02///////////////\n");
+        printf("Press the numbe the number to select list\n");
+        printf("1-/t List01\n");
+    */
+    FILE *fp = fopen("./Data/add.bin", "wb");
 
-
+    struct Task task = {"Tutorial_01", 20240816, 1, 0};
+    fwrite(&task, sizeof(struct Task), 1, fp);
+    fclose(fp);
 }
 
 /* Function to remove task to the list */
@@ -248,7 +275,7 @@ void remove_task()
 //----------------------------------------------------Nisindu----------------------------------------------------------------------------
 /*
 ------------Please Read this before Starting------------
-the project uses struct system to store task under 
+the project uses struct system to store task under
 test code with List03
 files are stored under this path  "./Data/yourFileNameHere.txt"
 
@@ -284,7 +311,7 @@ void Delete_Completed()
 //----------------------------------------------------Rivindu----------------------------------------------------------------------------
 /*
 ------------Please Read this before Starting------------
-the project uses struct system to store task under 
+the project uses struct system to store task under
 test code with List02
 files are stored under this path  "./Data/yourFileNameHere.txt"
 
@@ -309,57 +336,57 @@ void view_today()
 {
     printf("Function to View task to be done today");
 
-    //today
+    // today
     FILE *fptr;
-    char line[100];        // Buffer for reading lines from the file
-    char arr[100][100];    // Array to store each line
-    char arr2[100][100][100]; 
+    char line[100];     // Buffer for reading lines from the file
+    char arr[100][100]; // Array to store each line
+    char arr2[100][100][100];
     int i = 0;
     char *token;
     int done_j;
 
     fptr = fopen("list.txt", "r");
 
-    if (fptr == NULL) {
+    if (fptr == NULL)
+    {
         printf("ERROR: Unable to open file\n");
-        return 1;
+        command_identifier01();
     }
 
     // Skip the first line (header)
-    if (fgets(line, sizeof(line), fptr) == NULL) {
+    if (fgets(line, sizeof(line), fptr) == NULL)
+    {
         printf("ERROR: Unable to read the first line\n");
         fclose(fptr);
-        return 1;
+        command_identifier01();
     }
 
     // Read the remaining lines and store them in the array
-    while (fgets(line, sizeof(line), fptr) != NULL) {
+    while (fgets(line, sizeof(line), fptr) != NULL)
+    {
         strcpy(arr[i], line);
-        done_j=0;
-        for(int j=1;j<4; j++)
-        {   
-            if(done_j==0)
+        done_j = 0;
+        for (int j = 1; j < 4; j++)
+        {
+            if (done_j == 0)
             {
-                token=strtok(arr[i],",");
+                token = strtok(arr[i], ",");
                 strcpy(arr2[i][0], token);
-                //printf("%s",token);
-                //printf("arr2[%d][0]=%s\n",i,arr2[i][0]);
-                done_j=1;
+                // printf("%s",token);
+                // printf("arr2[%d][0]=%s\n",i,arr2[i][0]);
+                done_j = 1;
             }
-            token=strtok(NULL,",");
+            token = strtok(NULL, ",");
             strcpy(arr2[i][j], token);
-            //printf("%s",token);
-            //printf("arr2[%d][%d]=%s\n",i,j,arr2[i][j]);
-
-
+            // printf("%s",token);
+            // printf("arr2[%d][%d]=%s\n",i,j,arr2[i][j]);
         }
         i++;
-        
     }
-    //printf("%d",sizeof(line));
+    // printf("%d",sizeof(line));
     fclose(fptr);
 
-    //today find//////////////////////////////////////////////////////////////
+    // today find//////////////////////////////////////////////////////////////
     time_t t;
     struct tm *tm_info;
     char date[11]; // To store the date in "YYYY.MM.DD" format
@@ -373,17 +400,16 @@ void view_today()
     // Format the date as "YYYY.MM.DD" and store it in the 'date' variable
     strftime(date, 11, "%Y.%m.%d", tm_info);
 
-
     // Example: Assign today's date to a string variable
     char today[11];
     snprintf(today, sizeof(today), "%s", date);
 
     // Print the 'today' variable to verify
-    //printf("Today's date assigned to 'today' variable: %s\n", today);
+    // printf("Today's date assigned to 'today' variable: %s\n", today);
     /////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////
-    
-    //tommorow find////////////////////////////////////////////////////////
+
+    // tommorow find////////////////////////////////////////////////////////
     char tommorow[15];
 
     // Get today's date
@@ -396,93 +422,76 @@ void view_today()
 
     printf("Today: %s\n", today);
 
-    
     //////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////
 
-        //today tasks
-    
-    for(i=0; i<=sizeof(line);i++)
+    // today tasks
+
+    for (i = 0; i <= sizeof(line); i++)
     {
-        //printf("arr2[%d][2] is:%s   today is:%s\n"  ,i,arr2[i][2],today);
-        
+        // printf("arr2[%d][2] is:%s   today is:%s\n"  ,i,arr2[i][2],today);
 
-        if(strcmp(arr2[i][2],today)==0 && strcmp(arr2[i][3],"yes}")==0 )
+        if (strcmp(arr2[i][2], today) == 0 && strcmp(arr2[i][3], "yes}") == 0)
         {
-            printf("%s  %s  %s  %s\n",arr2[i][0],arr2[i][1],arr2[i][2],arr2[i][3]);
+            printf("%s  %s  %s  %s\n", arr2[i][0], arr2[i][1], arr2[i][2], arr2[i][3]);
         }
-       
-       
-       
     }
-
-        
-        
-       
 }
-    
-
-    
-    
-
-
 
 void view_tommorow()
 {
     printf("Function to View task to be done tommorow");
 
-
-    //tommorow
+    // tommorow
     FILE *fptr;
-    char line[100];        // Buffer for reading lines from the file
-    char arr[100][100];    // Array to store each line
-    char arr2[100][100][100]; 
+    char line[100];     // Buffer for reading lines from the file
+    char arr[100][100]; // Array to store each line
+    char arr2[100][100][100];
     int i = 0;
     char *token;
     int done_j;
 
     fptr = fopen("list.txt", "r");
 
-    if (fptr == NULL) {
+    if (fptr == NULL)
+    {
         printf("ERROR: Unable to open file\n");
-        return 1;
+        return;
     }
 
     // Skip the first line (header)
-    if (fgets(line, sizeof(line), fptr) == NULL) {
+    if (fgets(line, sizeof(line), fptr) == NULL)
+    {
         printf("ERROR: Unable to read the first line\n");
         fclose(fptr);
-        return 1;
     }
 
     // Read the remaining lines and store them in the array
-    while (fgets(line, sizeof(line), fptr) != NULL) {
+    while (fgets(line, sizeof(line), fptr) != NULL)
+    {
         strcpy(arr[i], line);
-        done_j=0;
-        for(int j=1;j<4; j++)
-        {   
-            if(done_j==0)
+        done_j = 0;
+        for (int j = 1; j < 4; j++)
+        {
+            if (done_j == 0)
             {
-                token=strtok(arr[i],",");
+                token = strtok(arr[i], ",");
                 strcpy(arr2[i][0], token);
-                //printf("%s",token);
-                //printf("arr2[%d][0]=%s\n",i,arr2[i][0]);
-                done_j=1;
+                // printf("%s",token);
+                // printf("arr2[%d][0]=%s\n",i,arr2[i][0]);
+                done_j = 1;
             }
-            token=strtok(NULL,",");
+            token = strtok(NULL, ",");
             strcpy(arr2[i][j], token);
-            //printf("%s",token);
-            //printf("arr2[%d][%d]=%s\n",i,j,arr2[i][j]);
-
-
+            // printf("%s",token);
+            // printf("arr2[%d][%d]=%s\n",i,j,arr2[i][j]);
         }
         i++;
-        
     }
-    //printf("%d",sizeof(line));
+    // printf("%d",sizeof(line));
     fclose(fptr);
 
-    //today find//////////////////////////////////////////////////////////////
+    // today find//////////////////////////////////////////////////////////////
     time_t t;
     struct tm *tm_info;
     char date[11]; // To store the date in "YYYY.MM.DD" format
@@ -496,12 +505,10 @@ void view_tommorow()
     // Format the date as "YYYY.MM.DD" and store it in the 'date' variable
     strftime(date, 11, "%Y.%m.%d", tm_info);
 
-
     // Example: Assign today's date to a string variable
     char today[11];
 
-    
-    //tommorow find////////////////////////////////////////////////////////
+    // tommorow find////////////////////////////////////////////////////////
     char tommorow[15];
 
     // Get today's date
@@ -514,39 +521,31 @@ void view_tommorow()
 
     printf("Today: %s\n", today);
     printf("Tomorrow: %s\n", tomorrow);
-    
+
     //////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////
 
+    // tomorrow tasks
 
-
-        //tomorrow tasks
-    
-    for(i=0; i<=sizeof(line);i++)
+    for (i = 0; i <= sizeof(line); i++)
     {
-        //printf("arr2[%d][2] is:%s   tommorow is:%s\n"  ,i,arr2[i][2],tomorrow);
-        
+        // printf("arr2[%d][2] is:%s   tommorow is:%s\n"  ,i,arr2[i][2],tomorrow);
 
-        if(strcmp(arr2[i][2],tomorrow)==0 && strcmp(arr2[i][3],"yes}")==0 )
+        if (strcmp(arr2[i][2], tomorrow) == 0 && strcmp(arr2[i][3], "yes}") == 0)
         {
-            printf("%s  %s  %s  %s\n",arr2[i][0],arr2[i][1],arr2[i][2],arr2[i][3]);
+            printf("%s  %s  %s  %s\n", arr2[i][0], arr2[i][1], arr2[i][2], arr2[i][3]);
         }
-        
-        
-       
     }
-    
-//&& strcmp(arr2[i][3],"yes}")==0
-    
-    
-    return 0;
 
+    //&& strcmp(arr2[i][3],"yes}")==0
+
+    return;
 }
 
 //----------------------------------------------------Dulaj----------------------------------------------------------------------------
 /*
 ------------Please Read this before Starting------------
-the project uses struct system to store task under 
+the project uses struct system to store task under
 test code with List04
 files are stored under this path  "./Data/yourFileNameHere.txt"
 
