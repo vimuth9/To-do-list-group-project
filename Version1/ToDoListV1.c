@@ -60,7 +60,7 @@ void login()
 void guide_text01()
 {
     system("cls");
-    printf("\033[34m //////////////// Guide ////////////////\n");
+    printf("\033[34m //////////////// Available Commands ////////////////\n");
     printf(" -------------------------------------- \n");
     printf(" Command \t| Task \n");
     printf(" -------------------------------------- \n");
@@ -218,7 +218,8 @@ void new_task_list()
     guide_text01();
 }
 
-void delete_task_list(){
+void delete_task_list()
+{
     system("cls");
     char ListDetails[100];
     char NewlistName[20];
@@ -580,6 +581,6 @@ void print_all_list()
 // Main function
 void main()
 {
-    // login();  // uncomment this
+    login(); // uncomment this
     guide_text01();
 }

@@ -1,0 +1,13 @@
+How to Create new list
+    create 4 list
+How to delete a list
+    delete the 2nd list
+How we can delete multiple list (explain why this works)
+    delete all files using the method in the help text
+    // this will change the id's to stop duplicates
+
+Add a new task
+    because there are no list the user will be directed to create a new list
+    create the new list
+    create another list
+    add a new task
