@@ -36,6 +36,7 @@ int main()
         printf("10. Filter by today/tommorow\n");
 
         printf("\n");
+        printf("99. Reset view\n");
         printf("0. exit app\n");
         printf("==============================================\033[0m\n\n");
         printf("\033[33mInsert command: \033[0m");
@@ -65,12 +66,14 @@ int main()
             displayAllList(1);
             char name[MAXLISTNAME];
             fetchListName(name);
-            printf("file name returned %s", name);
             displayTask(name);
             break;
         case 6:
             system("cls");
             displayAllTask();
+            break;
+        case 99:
+            system("cls");
             break;
         case 0:
             system("cls");
@@ -78,6 +81,7 @@ int main()
             sleep(1);
             system("cls");
             return 0;
+
         default:
             printf("Command Not identified");
             sleep(1);

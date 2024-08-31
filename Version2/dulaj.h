@@ -23,17 +23,15 @@ int displayTask( char name[MAXLISTNAME]) // 1 to displayAllList and neglect inpu
     int count = 0;
     char title[MAXTITLE];
 
-    printf("run2");
 
     fpl = fopen(name, "rb");
     
     if (fpl == NULL)
     {
-        printf("file name returned %s", name);
+        // printf("file name = %s", name);
         printf("\033[41m Error! File cannot be found ! \033[0m\n");
         return 0;
     }
-    printf("run3");
 
     printf("\n============= %s ==========================================\n", name);
     printf("| Status| ID\t| Due Date\t| Title\t\t| Description\n");
