@@ -65,11 +65,16 @@ int main()
             system("cls");
             displayAllList(1);
             char name[MAXLISTNAME];
-            fetchListName(name);
+            int id;
+            printf("\033[33mEnter List ID: \033[0m");
+            scanf("%d", &id);
+            fetchListNameByID(name,id);
             displayTask(name);
             break;
         case 6:
             system("cls");
+            displayAllList(1);
+
             displayAllTask();
             break;
         case 99:

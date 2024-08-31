@@ -17,14 +17,12 @@ int displayAllList(int x); // to have a return value pass 1 and any other number
 int newlist();
 void delList();
 
-void fetchListName(char *str)
+void fetchListNameByID(char *str, int id)
 {
-    int found, id;
+    int found;
     struct List l;
     FILE *fp;
     fp = fopen(flname, "rb");
-    printf("\033[33mEnter List ID: \033[0m");
-    scanf("%d", &id);
     while (1)
     {
         fread(&l, sizeof(l), 1, fp);
@@ -41,7 +39,6 @@ void fetchListName(char *str)
     }
     fclose(fp);
 }
-
 int newlist()
 {
     int count = displayAllList(1) + 1;

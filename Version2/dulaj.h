@@ -16,16 +16,15 @@ struct Task
     char des[MAXDISCRIPTION];
 };
 
-int displayTask( char name[MAXLISTNAME]) // 1 to displayAllList and neglect input name
+int displayTask(char name[MAXLISTNAME]) // 1 to displayAllList and neglect input name
 {
     FILE *fpl;
     struct Task t;
     int count = 0;
     char title[MAXTITLE];
 
-
     fpl = fopen(name, "rb");
-    
+
     if (fpl == NULL)
     {
         // printf("file name = %s", name);
@@ -62,4 +61,12 @@ int displayTask( char name[MAXLISTNAME]) // 1 to displayAllList and neglect inpu
 void displayAllTask()
 {
     printf("Display all task");
+    char name[MAXLISTNAME];
+    int id = 1;
+    while (1)
+    {
+        fetchListNameByID(name,id);
+        displayTask(name);
+        id++;
+    }
 }
