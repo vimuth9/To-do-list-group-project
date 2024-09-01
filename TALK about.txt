@@ -1,3 +1,4 @@
+🔴 Vimuth
 How to Create new list
     create 4 list
 How to delete a list
@@ -6,8 +7,23 @@ How we can delete multiple list (explain why this works)
     delete all files using the method in the help text
     // this will change the id's to stop duplicates
 
+🔴 Hashan
 Add a new task
     because there are no list the user will be directed to create a new list
     create the new list
     create another list
     add a new task
+Delete a task
+
+🔴 Dulaj
+View Selected List
+View All Lists
+Export Selected List
+Export All Lists
+
+🔴 Nisindu
+Mark a Task as complete
+View/Delete Tasks completed
+
+🔴 Rivindu
+View Task by Due Date

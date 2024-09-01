@@ -21,7 +21,7 @@ int main()
     int ch;
     while (1)
     {
-        printf("\033[34m===============\033[1m List Management \033[0m\033[34m===================================\n");
+        printf("\033[34m===============\033[1m Commands \033[0m\033[34m=========================================\n");
         printf("1. Create New List\n");
         printf("2. Delete List\n");
         printf("\n");
