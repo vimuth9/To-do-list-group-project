@@ -75,7 +75,6 @@ void delList()
     fp = fopen(flname, "rb");
     fpt = fopen(temp, "wb");
 
-    printf("\033[32m Tip - To remove multiple items from the list, input their IDs in descending order, separated by a space, with a \'2\' inserted between each ID.\nexample: \'3 2 2 2 1\'. \033[0m\n");
     printf("\033[33mEnter List ID: \033[0m");
     scanf("%d", &id);
 
@@ -105,7 +104,7 @@ void delList()
     fclose(fp);
     fclose(fpt);
     if (found == 0)
-        printf("list not founded");
+        printf("\033[31m ID Dosen't match \033[0m");
     else
     {
         fp = fopen(flname, "wb");

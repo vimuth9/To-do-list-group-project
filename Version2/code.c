@@ -9,36 +9,40 @@
 #include "rivindu.h" // Filter task by date(Today,Tommorow) every thing related time
 #include "nisindu.h" // Mark completed task and view and delete completed task
 
+void login();
+
 int main()
 {
-
+    login();
+    char name[MAXLISTNAME];
+    int id;
+    system("cls");
+    displayAllList(0);
     int ch;
     while (1)
     {
-        // system("cls");
-        displayAllList(0);
-        printf("\033[34m===============\033[1m List Management \033[0m\033[34m=================\n");
+        printf("\033[34m===============\033[1m List Management \033[0m\033[34m===================================\n");
         printf("1. Create New List\n");
         printf("2. Delete List\n");
-        printf("\033[34m===============\033[1m Task Related Commands \033[0m\033[34m=================\n");
-        printf("3. Add Task\n");
-        printf("4. Delete Task\n");
+        printf("\n");
+        printf("3. Export Selected List\n");
+        printf("30. Export All Lists\n");
 
         printf("\n");
-        printf("5. View Task List\n");
-        printf("6. View All Task Lists\n");
+        printf("4. Add Task to a List\n");
+        printf("5. Delete Task from a List\n");
         printf("\n");
-        printf("7. Mark completed task\n");
-        printf("8. View Completed task\n");
-        printf("8. Delete Completed task\n");
+        printf("6. View Tasks in a List\n");
+        printf("60. View All Tasks Across Lists\n");
         printf("\n");
-        printf("9. by today/tommorow\n");
-        printf("10. Filter by today/tommorow\n");
-
+        printf("8. Mark Task as Complete\n");
+        printf("80. View/Delete Completed Tasks\n");
         printf("\n");
-        printf("99. Reset view\n");
-        printf("0. exit app\n");
-        printf("==============================================\033[0m\n\n");
+        printf("9. View Tasks for Today/Tomorrow/Other\n");
+        printf("\n");
+        printf("99. Reset View\n");
+        printf("0. Exit App\n");
+        printf("=================================================================\033[0m\n\n");
         printf("\033[33mInsert command: \033[0m");
         scanf("%d", &ch);
 
@@ -47,46 +51,74 @@ int main()
         case 1:
             newlist(0);
             system("cls");
+            displayAllList(0);
             break;
         case 2:
             system("cls");
             delList();
             system("cls");
+            displayAllList(0);
             break;
         case 3:
             system("cls");
-            addTask(0);
+            displayAllList(1);
+            printf("\033[33mEnter List ID: \033[0m");
+            scanf("%d", &id);
+            fetchListNameByID(name, id);
+            exportList(name, 0);
+            printf("Export Successful\n");
+            sleep(1);
+            system("cls");
+            displayAllList(0);
+            break;
+        case 30:
+            exportAllLists();
+            printf("Export Successful\n");
+            sleep(1);
+            system("cls");
+            displayAllList(0);
             break;
         case 4:
             system("cls");
-            delTask(0);
+            addTask(0);
             break;
         case 5:
             system("cls");
-            displayAllList(1);
-            char name[MAXLISTNAME];
-            int id;
-            printf("\033[33mEnter List ID: \033[0m");
-            scanf("%d", &id);
-            fetchListNameByID(name,id);
-            displayTask(name);
+            delTask(0);
             break;
+
         case 6:
             system("cls");
             displayAllList(1);
 
+            printf("\033[33mEnter List ID: \033[0m");
+            scanf("%d", &id);
+            fetchListNameByID(name, id);
+            displayTask(name, 1);
+            break;
+        case 60:
+            system("cls");
+            displayAllList(1);
             displayAllTask();
+            break;
+        case 8:
+            // markCompletedTask();
+            break;
+        case 80:
+            // viewDeleteCompletedTasks();
+            break;
+        case 9:
+            // filterByDays();
             break;
         case 99:
             system("cls");
             break;
         case 0:
             system("cls");
-            printf("Exitting app... \n\nHave a Nice Day\n\n");
+            printf("Exiting app... \n\nHave a Nice Day\n\n");
             sleep(1);
             system("cls");
             return 0;
-
         default:
             printf("Command Not identified");
             sleep(1);
@@ -94,4 +126,20 @@ int main()
             break;
         }
     }
+}
+
+void login()
+{
+    const int correct_password = 1234;
+    int password;
+    do
+    {
+        printf("Enter password: ");
+        scanf("%d", &password); // Removed the '/n' in the format specifier
+    } while (password != correct_password);
+    printf("Login Successful\n");
+    sleep(1);      // Wait 1s
+    system("cls"); // clear terminal <stdlib.h>
+    guide_text01();
+    command_identifier01();
 }

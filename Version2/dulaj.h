@@ -16,7 +16,7 @@ struct Task
     char des[MAXDISCRIPTION];
 };
 
-int displayTask(char name[MAXLISTNAME]) // 1 to displayAllList and neglect input name
+int displayTask(char name[MAXLISTNAME], int color) // changes colour of the list when printing if the number is odd cyan and round to green
 {
     FILE *fpl;
     struct Task t;
@@ -28,10 +28,10 @@ int displayTask(char name[MAXLISTNAME]) // 1 to displayAllList and neglect input
     if (fpl == NULL)
     {
         // printf("file name = %s", name);
-        printf("\033[41m Error! File cannot be found ! \033[0m\n");
+        printf("\033[31m Error! File cannot be found ! \033[0m\n");
         return 0;
     }
-
+    color % 2 != 0 ? printf("\033[36m") : printf("\033[32m");
     printf("\n============= %s ==========================================\n", name);
     printf("| Status| ID\t| Due Date\t| Title\t\t| Description\n");
     printf("----------------------------------------------------------------------\n");
@@ -44,29 +44,101 @@ int displayTask(char name[MAXLISTNAME]) // 1 to displayAllList and neglect input
             break;
         if (count == 20) // temapaary
             break;
-        printf("%d \t| ", t.status);
+        t.status == 0 ? printf("|\t| ") : printf("|  %d \t| ", t.status);
         printf("%d \t| ", t.id);
         printf("%d \t| ", t.date);
-        printf("%s \t| ", t.title);
+        printf("%s", t.title);
+        int sizeTitle = strlen(t.title); // calculating the length of the title string
+        // printf("%d", sizeTitle);
+        sizeTitle < 7 ? printf("\t\t| ") : printf("\t| ");
         printf("%s \n", t.des);
         count++;
     }
     // sleep(4);
     fclose(fpl);
-    printf("================================================\n");
-    printf("Task Count = %d\n", count);
+    printf("======================================================================\n");
+    printf("Task Count = %d \033[0m\n", count);
     return count;
 }
 
 void displayAllTask()
 {
-    printf("Display all task");
+    system("cls");
     char name[MAXLISTNAME];
     int id = 1;
+    int count = displayAllList(1);
     while (1)
     {
-        fetchListNameByID(name,id);
-        displayTask(name);
+        fetchListNameByID(name, id);
+        displayTask(name, id);
+        if (id == count)
+            break;
+        id++;
+    }
+}
+int exportList(char name[MAXLISTNAME], int x) // 0 to overwrite any othernumber to append
+{
+    FILE *fpl, *fe;
+    struct Task t;
+    int count = 0;
+    char title[MAXTITLE];
+    fpl = fopen(name, "rb");
+
+    if (x == 0)
+    {
+        printf("\n\033[31m Overwriting \"Export.txt\" file.\033[0m\n");
+        fe = fopen("./Export/Export.txt", "w");
+    }
+    else
+    {
+        fe = fopen("./Export/Export.txt", "a");
+    }
+    if (fpl == NULL)
+    {
+        // printf("file name = %s", name);
+        printf("\033[31m Error! File cannot be found ! \033[0m\n");
+        return 0;
+    }
+    fprintf(fe, "\n============= %s ============================================\n", name);
+    fprintf(fe, "| Status| ID\t| Due Date\t| Title\t\t| Description\n");
+    fprintf(fe, "----------------------------------------------------------------------\n");
+    while (1)
+    {
+        fread(&t, sizeof(t), 1, fpl);
+        if (feof(fpl))
+            break;
+        if (sizeof(fpl) == 0)
+            break;
+        if (count == 20) // temapaary
+            break;
+        t.status == 0 ? fprintf(fe, "|\t\t| ") : fprintf(fe, "|  %d \t| ", t.status);
+        fprintf(fe, "%d \t| ", t.id);
+        fprintf(fe, "%d \t| ", t.date);
+        fprintf(fe, "%s", t.title);
+        int sizeTitle = strlen(t.title); // calculating the length of the title string
+        // printf("%d", sizeTitle);
+        sizeTitle < 7 ? fprintf(fe, "\t\t| ") : fprintf(fe, "\t| ");
+        fprintf(fe, "%s \n", t.des);
+        count++;
+    }
+    fprintf(fe, "======================================================================\n");
+    fprintf(fe, "Task Count = %d \n", count);
+    fclose(fpl);
+    fclose(fe);
+    return 0;
+}
+void exportAllLists()
+{
+    system("cls");
+    char name[MAXLISTNAME];
+    int id = 1;
+    int count = displayAllList(1);
+    while (1)
+    {
+        fetchListNameByID(name, id);
+        exportList(name, id - 1);
+        if (id == count)
+            break;
         id++;
     }
 }

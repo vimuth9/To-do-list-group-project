@@ -39,20 +39,22 @@ int addTask()
         return 0;
     }
 
-    t.id = displayTask(name) + 1; // calculate perfect id for the new task
+    t.id = displayTask(name, 1) + 1; // calculate perfect id for the new task
     printf("New Task ID = %d\n", t.id);
-    printf("Title: ");
+    printf("\033[33mTitle: \033[0m");
     scanf("%s", &t.title);
-    printf("Discription: ");
+    printf("\033[33mDiscription: \033[0m");
     scanf("%s", &t.des);
     int days;
-    printf("Due date: ");
+    printf("\033[33mDue date: \033[0m");
     scanf("%d", &days);
     t.date = calculateDueDate(days);
     t.status = 0;
-
     fwrite(&t, sizeof(t), 1, fpl);
     fclose(fpl);
+    system("cls");
+    displayAllList(0);
+    displayTask(name, 1);
     return 0;
 }
 
@@ -66,9 +68,9 @@ void delTask()
     printf("\033[33mEnter List ID: \033[0m");
     scanf("%d", &idl);
     fetchListNameByID(name, idl); // function defined in vimuth.h
-    printf("File name retured is%s", name);
+    // printf("File name retured is%s", name);
     int id;
-    displayTask(name);
+    displayTask(name, 1);
     printf("Enter Task id:");
     scanf("%d", &id);
     deleteTaskByID(name, id);
@@ -90,27 +92,23 @@ int deleteTaskByID(char *name, int id)
     while (1)
     {
         fread(&t, sizeof(t), 1, fp);
-        printf("running1");
+
         if (feof(fp))
         {
-            printf("running2");
             break;
         }
         if (t.id == id)
         {
-            printf("running3");
             found = 1;
         }
         else if (found == 1)
         {
-            printf("running4");
             t.id = t.id - 1;
             fwrite(&t, sizeof(t), 1, ft);
             count++;
         }
         else
         {
-            printf("running5");
             fwrite(&t, sizeof(t), 1, ft);
             count++;
         }
@@ -120,7 +118,7 @@ int deleteTaskByID(char *name, int id)
     fclose(fp);
     fclose(ft);
     if (found == 0)
-        printf("list not founded");
+        printf("\033[41mTask not founded\033[0m");
     else
     {
         fp = fopen(name, "wb");
@@ -134,10 +132,14 @@ int deleteTaskByID(char *name, int id)
             fwrite(&t, sizeof(t), 1, fp);
         }
     }
-    printf("\nCompleted permanantly deleting List\\s\n");
+    printf("Successfully Deleted\n");
     sleep(1);
+    system("cls");
     fclose(fp);
     fclose(ft);
+    displayAllList(0);
+    displayTask(name, 1);
+
     return count;
 }
 
