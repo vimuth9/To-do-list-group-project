@@ -10,22 +10,22 @@
 int addTask();
 void delTask();
 int deleteTaskByID(char *name, int id);
-int calculateDueDate(int x); // returns a interger as a date
+int calculateDueDate(int x); // returns a integer as a date
 
 int addTask()
 {
-    int count = displayAllList(1);
+    int count = displayAllList();
     if (count == 0)
     {
         printf("\033[41m No List Detected\n Let's Create a List first \033[0m\n");
-        newlist(); // Assuming newlist() creates a new list
+        newlist(); // newlist() creates a new list
         return 0;
     }
 
     FILE *fpl;
     struct Task t;
 
-    // Fetching the file name ussing id
+    // Fetching the file name using id
     char name[MAXLISTNAME];
     int id;
     printf("\033[33mEnter List ID: \033[0m");
@@ -43,7 +43,7 @@ int addTask()
     printf("New Task ID = %d\n", t.id);
     printf("\033[33mTitle: \033[0m");
     scanf("%s", &t.title);
-    printf("\033[33mDiscription: \033[0m");
+    printf("\033[33mDescription: \033[0m");
     scanf("%s", &t.des);
     int days;
     printf("\033[33mDue date: \033[0m");
@@ -53,14 +53,14 @@ int addTask()
     fwrite(&t, sizeof(t), 1, fpl);
     fclose(fpl);
     system("cls");
-    displayAllList(0);
+    displayAllList();
     displayTask(name, 1);
     return 0;
 }
 
 void delTask()
 {
-    displayAllList(0);
+    displayAllList();
     // FILE *fpl;
     struct Task t;
     char name[MAXLISTNAME];
@@ -68,7 +68,7 @@ void delTask()
     printf("\033[33mEnter List ID: \033[0m");
     scanf("%d", &idl);
     fetchListNameByID(name, idl); // function defined in vimuth.h
-    // printf("File name retured is%s", name);
+    // printf("File name returned is%s", name);
     int id;
     displayTask(name, 1);
     printf("Enter Task id:");
@@ -137,7 +137,7 @@ int deleteTaskByID(char *name, int id)
     system("cls");
     fclose(fp);
     fclose(ft);
-    displayAllList(0);
+    displayAllList();
     displayTask(name, 1);
 
     return count;
@@ -153,6 +153,6 @@ int calculateDueDate(int days)
     // Normalize the time structure
     mktime(&tm);
     // Format the date as YYYYMMDD
-    int newDate = (tm.tm_year + 1900) * 10000 + (tm.tm_mon + 1) * 100 + tm.tm_mday; // adding 1900 becouse time libery counting years from 1900
+    int newDate = (tm.tm_year + 1900) * 10000 + (tm.tm_mon + 1) * 100 + tm.tm_mday; // adding 1900 because time libary counting years from 1900
     return newDate;
 }

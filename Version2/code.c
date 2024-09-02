@@ -17,7 +17,7 @@ int main()
     char name[MAXLISTNAME];
     int id;
     system("cls");
-    displayAllList(0);
+    displayAllList();
     int ch;
     while (1)
     {
@@ -51,17 +51,17 @@ int main()
         case 1:
             newlist(0);
             system("cls");
-            displayAllList(0);
+            displayAllList();
             break;
         case 2:
             system("cls");
             delList();
             system("cls");
-            displayAllList(0);
+            displayAllList();
             break;
         case 3:
             system("cls");
-            displayAllList(1);
+            displayAllList();
             printf("\033[33mEnter List ID: \033[0m");
             scanf("%d", &id);
             fetchListNameByID(name, id);
@@ -69,14 +69,14 @@ int main()
             printf("Export Successful\n");
             sleep(1);
             system("cls");
-            displayAllList(0);
+            displayAllList();
             break;
         case 30:
             exportAllLists();
             printf("Export Successful\n");
             sleep(1);
             system("cls");
-            displayAllList(0);
+            displayAllList();
             break;
         case 4:
             system("cls");
@@ -89,7 +89,7 @@ int main()
 
         case 6:
             system("cls");
-            displayAllList(1);
+            displayAllList();
 
             printf("\033[33mEnter List ID: \033[0m");
             scanf("%d", &id);
@@ -130,6 +130,7 @@ int main()
 
 void login()
 {
+    system("cls"); // clear terminal <stdlib.h>
     const int correct_password = 1234;
     int password;
     do
@@ -139,7 +140,4 @@ void login()
     } while (password != correct_password);
     printf("Login Successful\n");
     sleep(1);      // Wait 1s
-    system("cls"); // clear terminal <stdlib.h>
-    guide_text01();
-    command_identifier01();
 }

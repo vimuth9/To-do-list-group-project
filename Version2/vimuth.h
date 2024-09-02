@@ -13,7 +13,9 @@ struct List
     char name[MAXLISTNAME];
 };
 
-int displayAllList(int x); // to have a return value pass 1 and any other number for print
+void fetchListNameByID(char *str, int id);
+int displayAllList(); // to have a return value pass 1 and any other number for print
+
 int newlist();
 void delList();
 
@@ -39,6 +41,43 @@ void fetchListNameByID(char *str, int id)
     }
     fclose(fp);
 }
+
+int displayAllList()
+{
+    FILE *fp;
+    struct List l;
+    int count = 0;
+
+    fp = fopen(flname, "rb");
+    if (fp == NULL)
+    {
+        printf("\033[31m No List Found \033[0m\n");
+        return count;
+    }
+
+    printf("[\033[35m=============All Lists===============\n");
+    printf("ID\t|\tName\n");
+    printf("-------------------------------------\n");
+
+    while (1)
+    {
+        fread(&l, sizeof(l), 1, fp);
+        if (feof(fp))
+            break;
+        if (sizeof(fp) == 0)
+            break;
+        printf("%d \t|\t", l.id);
+        printf("%s \n", l.name);
+        count++;
+    }
+    fclose(fp);
+    printf("================================================\n");
+    (count == 0) ? printf("\031[35mPlease Create New List\033[0m") : printf("List count = %d", count);
+    printf("\n================================================\033[0m\n\n");
+
+    return count;
+}
+
 int newlist()
 {
     int count = displayAllList(1) + 1;
@@ -66,7 +105,7 @@ int newlist()
 
 void delList()
 {
-    displayAllList(0);
+    displayAllList();
     FILE *fp, *fpt;
     struct List l;
     int id, found = 0, count = 0;
@@ -104,7 +143,7 @@ void delList()
     fclose(fp);
     fclose(fpt);
     if (found == 0)
-        printf("\033[31m ID Dosen't match \033[0m");
+        printf("\033[31m ID doesn't match \033[0m");
     else
     {
         fp = fopen(flname, "wb");
@@ -118,52 +157,9 @@ void delList()
             fwrite(&l, sizeof(l), 1, fp);
         }
     }
-    printf("\nCompleted permanantly deleting List\\s\n");
+    printf("\nCompleted permanently deleting List\\s\n");
     sleep(1);
     fclose(fp);
     fclose(fpt);
     remove(temp);
-}
-
-int displayAllList(int x)
-{
-    FILE *fp;
-    struct List l;
-    int count = 0;
-
-    fp = fopen(flname, "rb");
-    if (fp == NULL)
-    {
-        printf("\033[31m No List Found \033[0m\n");
-        return count;
-    }
-
-    printf("=============All Lists===============\n");
-    printf("ID\t|\tName\n");
-    printf("-------------------------------------\n");
-
-    while (1)
-    {
-        fread(&l, sizeof(l), 1, fp);
-        if (feof(fp))
-            break;
-        if (sizeof(fp) == 0)
-            break;
-        printf("%d \t|\t", l.id);
-        printf("%s \n", l.name);
-        count++;
-    }
-    fclose(fp);
-    printf("================================================\n");
-    switch (x)
-    {
-    case 1:
-        return count;
-        break;
-    default:
-        (count == 0) ? printf("Plese Crearte New List") : printf("List count = %d", count);
-        printf("\n================================================\n\n");
-        break;
-    }
-    return count;
 }

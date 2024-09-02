@@ -7,6 +7,7 @@
 #define MAXTITLE 40
 #define MAXDISCRIPTION 40
 
+
 struct Task
 {
     int id;
@@ -15,6 +16,11 @@ struct Task
     int status; // 1 for completed 0 for
     char des[MAXDISCRIPTION];
 };
+
+int displayTask(char name[MAXLISTNAME], int color);
+void displayAllTask();
+int exportList(char name[MAXLISTNAME], int x);
+void exportAllLists();
 
 int displayTask(char name[MAXLISTNAME], int color) // changes colour of the list when printing if the number is odd cyan and round to green
 {
@@ -42,7 +48,7 @@ int displayTask(char name[MAXLISTNAME], int color) // changes colour of the list
             break;
         if (sizeof(fpl) == 0)
             break;
-        if (count == 20) // temapaary
+        if (count == 20) // temporay
             break;
         t.status == 0 ? printf("|\t| ") : printf("|  %d \t| ", t.status);
         printf("%d \t| ", t.id);
@@ -66,7 +72,7 @@ void displayAllTask()
     system("cls");
     char name[MAXLISTNAME];
     int id = 1;
-    int count = displayAllList(1);
+    int count = displayAllList();
     while (1)
     {
         fetchListNameByID(name, id);
@@ -83,15 +89,15 @@ int exportList(char name[MAXLISTNAME], int x) // 0 to overwrite any othernumber 
     int count = 0;
     char title[MAXTITLE];
     fpl = fopen(name, "rb");
-
+    char fename[20] = "./Export/Export.txt";
     if (x == 0)
     {
         printf("\n\033[31m Overwriting \"Export.txt\" file.\033[0m\n");
-        fe = fopen("./Export/Export.txt", "w");
+        fe = fopen(fename, "w");
     }
     else
     {
-        fe = fopen("./Export/Export.txt", "a");
+        fe = fopen(fename, "a");
     }
     if (fpl == NULL)
     {
@@ -109,7 +115,7 @@ int exportList(char name[MAXLISTNAME], int x) // 0 to overwrite any othernumber 
             break;
         if (sizeof(fpl) == 0)
             break;
-        if (count == 20) // temapaary
+        if (count == 20) // temporay
             break;
         t.status == 0 ? fprintf(fe, "|\t\t| ") : fprintf(fe, "|  %d \t| ", t.status);
         fprintf(fe, "%d \t| ", t.id);
