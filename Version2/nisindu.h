@@ -15,12 +15,13 @@ void markCompletedTask()
 {
     displayAllTask();
     int idl, idt;
-    printf("Enter List ID: ");
-    scanf("%d", idl);
-    printf("Enter Task ID: ");
-    scanf("%d", idt);
+    printf("\n\033[33mEnter List ID: \033[0m");
+    scanf("%d", &idl);
+    printf("\033[33mEnter Task ID: \033[0m");
+    scanf("%d", &idt);
     char name[MAXLISTNAME];
     fetchListNameByID(name, idl);
+    printf("%s", name);
     markCompleteByID(name, idt);
 }
 

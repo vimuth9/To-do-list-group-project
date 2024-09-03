@@ -76,7 +76,7 @@ void displayAllTask()
     while (1)
     {
         fetchListNameByID(name, id);
-        printf("List ID : %d\n",id);
+        printf("\nList ID : %d",id);
         displayTask(name, id);
         if (id == count)
             break;
