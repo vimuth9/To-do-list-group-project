@@ -6,8 +6,8 @@
 // #include "vimuth.h"  // functions to create,delete,view created list (List Management)
 #include "hashan.h" // functions to add ,remove task from a selected list
 // #include "dulaj.h"   // Display Task List and export to a text file non binary
-#include "rivindu.h" // Filter task by date(Today,Tommorow) every thing related time
 #include "nisindu.h" // Mark completed task and view and delete completed task
+#include "rivindu.h" // Filter task by date(Today,Tommorow) every thing related time
 
 void login();
 
@@ -102,7 +102,7 @@ int main()
             displayAllTask();
             break;
         case 8:
-            // markCompletedTask();
+            markCompletedTask();
             break;
         case 80:
             // viewDeleteCompletedTasks();
