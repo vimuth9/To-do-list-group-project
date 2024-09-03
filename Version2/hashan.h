@@ -139,7 +139,7 @@ int deleteTaskByID(char *name, int id)
     fclose(ft);
     displayAllList();
     displayTask(name, 1);
-
+    remove(temp2);
     return count;
 }
 
