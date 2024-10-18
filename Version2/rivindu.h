@@ -4,8 +4,8 @@
 #include <unistd.h>
 #include <time.h>
 
-#include "vimuth.h"
-#include "dulaj.h"
+// #include "vimuth.h"
+// #include "dulaj.h"
 
 #define MAXTITLE 40
 #define MAXDESCRIPTION 40

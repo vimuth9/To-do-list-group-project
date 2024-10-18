@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "stdlib.h": "c",
-        "hashan.h": "c"
+        "hashan.h": "c",
+        "dulaj.h": "c"
     }
 }

@@ -36,7 +36,8 @@ int main()
         printf("60. View All Tasks Across Lists\n");
         printf("\n");
         printf("8. Mark Task as Complete\n");
-        printf("80. View/Delete Completed Tasks\n");
+        printf("80. View Completed Tasks\n");
+        printf("800. Delete Completed Tasks\n");
         printf("\n");
         printf("9. View Tasks for Today/Tomorrow/Other\n");
         printf("\n");
@@ -105,7 +106,10 @@ int main()
             markCompletedTask();
             break;
         case 80:
-            // viewDeleteCompletedTasks();
+            viewAllCompletedTask();
+            break;
+        case 800:
+            deleteAllCompletedTask();
             break;
         case 9:
             // filterByDays();
@@ -139,5 +143,5 @@ void login()
         scanf("%d", &password); // Removed the '/n' in the format specifier
     } while (password != correct_password);
     printf("Login Successful\n");
-    sleep(1);      // Wait 1s
+    sleep(1); // Wait 1s
 }

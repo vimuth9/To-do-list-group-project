@@ -223,8 +223,10 @@ int main() {
 ### Functions Included
 
 ```c
-
-
+void markCompletedTask();
+int markCompleteByID(char *name, int id);
+void viewCompletedTask();
+void deleteCompletedTask();
 ```
 ### Pre-defined global variables
 ```c
