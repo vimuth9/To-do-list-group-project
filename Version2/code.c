@@ -112,7 +112,7 @@ int main()
             deleteAllCompletedTask();
             break;
         case 9:
-            // filterByDays();
+            filterByDays();
             break;
         case 99:
             system("cls");

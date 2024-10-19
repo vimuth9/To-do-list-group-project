@@ -55,7 +55,7 @@ int displayAllList()
         return count;
     }
 
-    printf("[\033[35m=============All Lists===============\n");
+    printf("\033[35m=============All Lists===============\n");
     printf("ID\t|\tName\n");
     printf("-------------------------------------\n");
 
@@ -72,7 +72,7 @@ int displayAllList()
     }
     fclose(fp);
     printf("================================================\n");
-    (count == 0) ? printf("\031[35mPlease Create New List\033[0m") : printf("List count = %d", count);
+    (count == 0) ? printf("\033[35m Please Create New List\033[0m") : printf("List count = %d", count);
     printf("\n================================================\033[0m\n\n");
 
     return count;

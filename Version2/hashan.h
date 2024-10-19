@@ -10,7 +10,7 @@
 int addTask();
 void delTask();
 int deleteTaskByID(char *name, int id);
-int calculateDueDate(int x); // returns a integer as a date
+int calculateDueDate(int days); // returns a integer as a date
 
 int addTask()
 {
